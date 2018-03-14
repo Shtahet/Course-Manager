@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseManager.DAL", "Course
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseManager.BOL", "CourseManager.BOL\CourseManager.BOL.csproj", "{05E6622A-E9CF-4CB6-B6C2-4EA00884F9AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CourseManager.WebUI", "CourseManager.WebUI\CourseManager.WebUI.csproj", "{E4238DCB-F807-4F56-9DE4-ED396B11FA94}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{05E6622A-E9CF-4CB6-B6C2-4EA00884F9AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05E6622A-E9CF-4CB6-B6C2-4EA00884F9AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05E6622A-E9CF-4CB6-B6C2-4EA00884F9AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E4238DCB-F807-4F56-9DE4-ED396B11FA94}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E4238DCB-F807-4F56-9DE4-ED396B11FA94}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E4238DCB-F807-4F56-9DE4-ED396B11FA94}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E4238DCB-F807-4F56-9DE4-ED396B11FA94}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
