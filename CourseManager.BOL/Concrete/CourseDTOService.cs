@@ -4,6 +4,7 @@ using CourseManager.DAL.Model;
 using Sellers.BOL.Abstract;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace CourseManager.BOL.Concrete
@@ -18,27 +19,28 @@ namespace CourseManager.BOL.Concrete
         }
         public void AddOrUpdate(CourseDTO obj)
         {
-            throw new NotImplementedException();
+            courseRepo.AddOrUpdate((Course)obj);
         }
 
         public void Delete(CourseDTO obj)
         {
-            throw new NotImplementedException();
+            courseRepo.Delete((Course)obj);
         }
 
         public IEnumerable<CourseDTO> FindBy(Expression<Func<CourseDTO, bool>> predicate)
         {
-            throw new NotImplementedException();
+            Expression<Func<Course, bool>> predicateDAL = ConvertTypeExpression.ConvertType<CourseDTO, Course>(predicate.Body);
+            return courseRepo.FindBy(predicateDAL).ToList().Select(c => (CourseDTO)c);
         }
 
         public CourseDTO Get(int id)
         {
-            throw new NotImplementedException();
+            return (CourseDTO)courseRepo.Get(id);
         }
 
         public IEnumerable<CourseDTO> GetAll()
         {
-            throw new NotImplementedException();
+            return courseRepo.GetAll().ToList().Select(c => (CourseDTO)c);
         }
     }
 }
