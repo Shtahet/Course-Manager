@@ -5,9 +5,9 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CoursManager.DAL.Abstract
+namespace CourseManager.DAL.Abstract
 {
-    interface IGenericRepository<T> where T: class, new()
+    public interface IGenericRepository<T> where T: class, new()
     {
         IQueryable<T> GetAll();
         IQueryable<T> FindBy(Expression<Func<T, bool>> predicate);
