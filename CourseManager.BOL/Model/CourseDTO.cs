@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CourseManager.BOL.Model
 {
-    class CourseDTO
+    public class CourseDTO
     {
         public int CoursID { get; set; }
         [Required]

@@ -9,7 +9,7 @@ using System.Linq.Expressions;
 
 namespace CourseManager.BOL.Concrete
 {
-    class CourseDTOService : IBolService<CourseDTO>
+    public class CourseDTOService : IBolService<CourseDTO>
     {
         private IGenericRepository<Course> courseRepo;
 

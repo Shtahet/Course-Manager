@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace CourseManager.BOL.Concrete
 {
-    class ScheduleDTOService : IBolService<ScheduleDTO>
+    public class ScheduleDTOService : IBolService<ScheduleDTO>
     {
         IGenericRepository<Schedule> scheduleRepo;
         public ScheduleDTOService(IGenericRepository<Schedule> DISchedule)

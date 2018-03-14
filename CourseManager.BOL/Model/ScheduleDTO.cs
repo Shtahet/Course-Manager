@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CourseManager.BOL.Model
 {
-    class ScheduleDTO
+    public class ScheduleDTO
     {
         public int ScheduleID { get; set; }
 
