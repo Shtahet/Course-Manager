@@ -42,13 +42,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Abstract\IBolService.cs" />
+    <Compile Include="Concrete\CourseDTOService.cs" />
     <Compile Include="Model\CourseDTO.cs" />
     <Compile Include="Model\ScheduleDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CourseManager.DAL\CourseManager.DAL.csproj">
-      <Project>{301C89FF-C58C-4C7F-84D9-EE383EE72C05}</Project>
+      <Project>{301c89ff-c58c-4c7f-84d9-ee383ee72c05}</Project>
       <Name>CourseManager.DAL</Name>
     </ProjectReference>
   </ItemGroup>
