@@ -16,6 +16,7 @@ namespace CourseManager.DAL.Model
         }
 
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [Key]
         public int CoursID { get; set; }
 
         [Required]
