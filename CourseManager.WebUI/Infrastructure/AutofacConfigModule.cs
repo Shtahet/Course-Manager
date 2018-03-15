@@ -16,7 +16,7 @@ namespace CourseManager.WebUI.Infrastructure
             builder.RegisterType(typeof(CourseContext)).As(typeof(DbContext)).InstancePerLifetimeScope();
             builder.RegisterGeneric(typeof(GenericRepository<>)).As(typeof(IGenericRepository<>)).InstancePerRequest();
             builder.RegisterType(typeof(CourseDTOService)).As(typeof(IBolService<CourseDTO>)).InstancePerRequest();
-            builder.RegisterType(typeof(CourseDTOService)).As(typeof(IBolService<ScheduleDTO>)).InstancePerRequest();
+            builder.RegisterType(typeof(ScheduleDTOService)).As(typeof(IBolService<ScheduleDTO>)).InstancePerRequest();
             base.Load(builder);
         }
     }
