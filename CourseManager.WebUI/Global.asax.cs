@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Autofac;
+using Autofac.Integration.Mvc;
+using CourseManager.WebUI.Infrastructure;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +16,14 @@ namespace CourseManager.WebUI
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            //Autofac configuration
+            var builder = new ContainerBuilder();
+            builder.RegisterControllers(typeof(MvcApplication).Assembly).PropertiesAutowired();
+            builder.RegisterModule(new AutofacConfigModule());
+
+            var container = builder.Build();
+            DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
         }
     }
 }
