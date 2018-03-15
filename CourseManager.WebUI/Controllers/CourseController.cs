@@ -23,5 +23,22 @@ namespace CourseManager.WebUI.Controllers
             var model = courseService.GetAll();
             return View(model);
         }
+
+        public ActionResult Edit(int id = 0)
+        {
+            CourseDTO model = (id == 0) ? new CourseDTO() : courseService.Get(id);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(CourseDTO editCourse)
+        {
+            if (ModelState.IsValid)
+            {
+                courseService.AddOrUpdate(editCourse);
+                return RedirectToAction("Index");
+            }
+            return View(editCourse);
+        }
     }
 }
