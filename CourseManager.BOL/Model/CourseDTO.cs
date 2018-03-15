@@ -13,11 +13,14 @@ namespace CourseManager.BOL.Model
         public int CoursID { get; set; }
         [Required]
         [StringLength(100)]
+        [Display(Name = "Название курса")]
         public string Name { get; set; }
 
         [StringLength(4000)]
+        [Display(Name = "Описание")]
         public string Description { get; set; }
 
+        [Display(Name = "Стоимость")]
         public decimal Price { get; set; }
 
         public static explicit operator CourseDTO(Course obj)
