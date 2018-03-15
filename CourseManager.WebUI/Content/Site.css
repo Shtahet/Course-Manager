@@ -26,3 +26,7 @@ textarea {
     max-width: 280px;
 }
 
+.top-buffer {
+    margin-top: 10px;
+}
+
