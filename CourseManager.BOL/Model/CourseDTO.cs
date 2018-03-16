@@ -21,6 +21,7 @@ namespace CourseManager.BOL.Model
         public string Description { get; set; }
 
         [Display(Name = "Стоимость")]
+        [Range(0.001d,Double.MaxValue, ErrorMessage = "Стоимость курса должна быть больше нуля")]
         public decimal Price { get; set; }
 
         public static explicit operator CourseDTO(Course obj)
