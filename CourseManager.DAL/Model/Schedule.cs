@@ -9,7 +9,6 @@ namespace CourseManager.DAL.Model
     [Table("Schedule")]
     public partial class Schedule
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int ScheduleID { get; set; }
 
         public int CoursID { get; set; }
@@ -18,6 +17,6 @@ namespace CourseManager.DAL.Model
 
         public DateTime EndDate { get; set; }
 
-        public virtual Course Course { get; set; }
+        public virtual Course Cours { get; set; }
     }
 }
