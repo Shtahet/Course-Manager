@@ -6,25 +6,61 @@
 
 <div class="row">
     <h2 class="col">Обучающие курсы и их стоимость</h2>
-</div class="row">
+</div>
 
 <div class="row">
     <div class="col-12">
         <a class="btn btn-success" href="@Url.Action("Edit")"><span class="glyphicon glyphicon-plus"></span> Добавить курс</a>
-    </div></div>
+    </div>
+</div>
 
-<div class="row top-buffer">
+<div class="row top-buffer mb-3">
     <div class="col-1"></div>
     <div class="col-6"><strong>@Html.DisplayNameFor(model => model.Name)</strong></div>
-    <div class="col-4"><strong>@Html.DisplayNameFor(model => model.Price)</strong></div>
-    <div class="col-1"></div>
+    <div class="col-2"><strong>@Html.DisplayNameFor(model => model.Price)</strong></div>
+    <div class="col-3"></div>
 </div>
 @foreach (var item in Model)
 {
-<div class="row">
-    <div class="col-1"></div>
-    <div class="col-6">@Html.DisplayFor(modelItem => item.Name)</div>
-    <div class="col-4">@Html.DisplayFor(modelItem => item.Price)</div>
-    <div class="col-1">@Html.ActionLink("Список заказов", "OrderDetail", new { id = item.CoursID }, new { @class = "btn btn-primary btn-md" })</div>
-</div>
+    <div class="row mb-1">
+        <div class="col-1"></div>
+        <div class="col-6">@Html.DisplayFor(modelItem => item.Name)</div>
+        <div class="col-2">@Html.DisplayFor(modelItem => item.Price)</div>
+        <div class="col-3">
+            <div class="btn-group">
+                @Html.ActionLink("Редактировать", "Edit", new { id = item.CoursID }, new { @class = "btn btn-warning btn-sm" })
+                <a href="javascript:void(0);" class="btn btn-danger btn-sm deleteclass" data-url="@Url.Action("Delete", "Customer")" data-id="@item.CoursID">Удалить</a>
+            </div>
+        </div>
+
+    </div>
+}
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.deleteclass').click(function (e) {
+                if (confirm("Вы действительно хотите удалить запись?")) {
+                    var settings = {
+                        url: $(this).data('url'),
+                        type: 'POST',
+                        data: { id: $(this).data('id') },
+                        success: function (result) {
+                            if (result == "OK") {
+                                alert("Запись удалена");
+                                window.location.href = window.location.href;
+                            }
+                            else {
+                                alert("Не удалось удалить запись");
+                            }
+                        },
+                        error: function (result) {
+                            alert("Ошибка запроса: " + result.status + " " + result.statusText + "\n" + result.responseJSON.message);
+                        }
+                    }
+                    $.ajax(settings);
+                }
+            });
+        });
+    </script>
 }
