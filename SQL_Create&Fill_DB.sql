@@ -1,8 +1,17 @@
+USE master;
+IF DB_ID('CourseManagerDB') IS NOT NULL
+   DROP DATABASE CourseManagerDB;
+GO
+CREATE DATABASE CourseManagerDB;
+GO
+
+USE CourseManagerDB;
+GO
 CREATE TABLE [Courses] (
-	CoursID int NOT NULL,
-	Name nvarchar(100) NOT NULL,
-	Description nvarchar(4000) NULL,
-	Price money NOT NULL,
+	CoursID			INT				NOT NULL IDENTITY(1, 1),
+	Name			NVARCHAR(100)	NOT NULL,
+	[Description]	NVARCHAR(4000)	NULL,
+	Price			MONEY			NOT NULL,
   CONSTRAINT [PK_COURSES_CoursID] PRIMARY KEY CLUSTERED
   (
   [CoursID] ASC
@@ -11,10 +20,10 @@ CREATE TABLE [Courses] (
 )
 GO
 CREATE TABLE [Schedule] (
-	ScheduleID int NOT NULL,
-	CoursID int NOT NULL,
-	StartDate datetime NOT NULL,
-	EndDate datetime NOT NULL,
+	ScheduleID	INT			NOT NULL IDENTITY(1, 1),
+	CoursID		INT			NOT NULL,
+	StartDate	DATETIME	NOT NULL,
+	EndDate		DATETIME	NOT NULL,
   CONSTRAINT [PK_SCHEDULE_ScheduleID] PRIMARY KEY CLUSTERED
   (
   [ScheduleID] ASC
