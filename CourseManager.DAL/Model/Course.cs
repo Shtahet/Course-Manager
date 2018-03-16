@@ -15,6 +15,7 @@ namespace CourseManager.DAL.Model
             Schedules = new HashSet<Schedule>();
         }
 
+        [Key]
         public int CoursID { get; set; }
 
         [Required]

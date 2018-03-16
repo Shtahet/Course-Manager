@@ -23,7 +23,7 @@ namespace CourseManager.DAL.Model
 
             modelBuilder.Entity<Course>()
                 .HasMany(e => e.Schedules)
-                .WithRequired(e => e.Cours)
+                .WithRequired(e => e.Course)
                 .WillCascadeOnDelete(false);
         }
     }
