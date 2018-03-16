@@ -29,7 +29,7 @@
         <div class="col-3">
             <div class="btn-group">
                 @Html.ActionLink("Редактировать", "Edit", new { id = item.CoursID }, new { @class = "btn btn-warning btn-sm" })
-                <a href="javascript:void(0);" class="btn btn-danger btn-sm deleteclass" data-url="@Url.Action("Delete", "Customer")" data-id="@item.CoursID">Удалить</a>
+                <a href="javascript:void(0);" class="btn btn-danger btn-sm deleteclass" data-url="@Url.Action("Delete", "Course")" data-id="@item.CoursID">Удалить</a>
             </div>
         </div>
 
