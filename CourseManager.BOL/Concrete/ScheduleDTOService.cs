@@ -23,9 +23,9 @@ namespace CourseManager.BOL.Concrete
             scheduleRepo.AddOrUpdate((Schedule)obj);
         }
 
-        public void Delete(ScheduleDTO obj)
+        public void Delete(int id)
         {
-            scheduleRepo.Delete((Schedule)obj);
+            scheduleRepo.Delete(id);
         }
 
         public IEnumerable<ScheduleDTO> FindBy(Expression<Func<ScheduleDTO, bool>> predicate)

@@ -13,6 +13,6 @@ namespace Sellers.BOL.Abstract
 		IEnumerable<T> FindBy(Expression<Func<T, bool>> predicate);
 		T Get(int id);
 		void AddOrUpdate(T obj);
-		void Delete(T obj);
+		void Delete(int id);
 	}
 }

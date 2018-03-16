@@ -22,9 +22,9 @@ namespace CourseManager.BOL.Concrete
             courseRepo.AddOrUpdate((Course)obj);
         }
 
-        public void Delete(CourseDTO obj)
+        public void Delete(int id)
         {
-            courseRepo.Delete((Course)obj);
+            courseRepo.Delete(id);
         }
 
         public IEnumerable<CourseDTO> FindBy(Expression<Func<CourseDTO, bool>> predicate)

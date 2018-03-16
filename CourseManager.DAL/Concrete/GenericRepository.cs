@@ -26,9 +26,10 @@ namespace CourseManager.DAL.Concrete
             context.SaveChanges();
         }
 
-        public void Delete(T obj)
+        public void Delete(int key)
         {
-            dbSet.Remove(obj);
+            T ObjectEF = dbSet.Find(key);
+            dbSet.Remove(ObjectEF);
             context.SaveChanges();
         }
 

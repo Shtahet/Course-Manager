@@ -40,5 +40,41 @@ namespace CourseManager.WebUI.Controllers
             }
             return View(editCourse);
         }
+
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            CourseDTO tmpCourse = courseService.Get(id);
+            if (tmpCourse != null)
+            {
+                try
+                {
+                    courseService.Delete(tmpCourse.CoursID);
+                    return Json("OK");
+                }
+                catch (Exception ex)
+                {
+                    Exception firstEx = ex;
+                    while (firstEx.InnerException != null)
+                    {
+                        firstEx = firstEx.InnerException;
+                    }
+                    if (firstEx is System.Data.SqlClient.SqlException sqlEx && sqlEx.Number == 547)
+                    {
+                        Response.StatusCode = (int)System.Net.HttpStatusCode.Conflict;
+                        return Json(new
+                        {
+                            status = System.Net.HttpStatusCode.Conflict,
+                            exeption = "Ошибка удаления",
+                            message = "Невозможно удалить запись, так как на нее ссылаются другие источники"
+                        });
+                    }
+                    return new HttpStatusCodeResult(System.Net.HttpStatusCode.Conflict, ex.Message);
+                }
+
+            }
+
+            return Json("BAD");
+        }
     }
 }
