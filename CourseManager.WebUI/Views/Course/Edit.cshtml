@@ -6,7 +6,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
+    @Html.HiddenFor(model => model.CoursID)
     <div class="form-horizontal">
         <h4>
             @if (Model.CoursID == 0)
