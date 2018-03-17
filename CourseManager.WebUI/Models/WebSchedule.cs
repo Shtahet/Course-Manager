@@ -41,5 +41,14 @@ namespace CourseManager.WebUI.Models
             get { return endDate; }
             set { endDate = value; }
         }
+        public int DayOfWeek
+        {
+            get { return (int)startDate.DayOfWeek; }
+            set
+            {
+                startDate.AddDays(value);
+                endDate.AddDays(value);
+            }
+        }
     }
 }
