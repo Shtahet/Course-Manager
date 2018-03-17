@@ -76,5 +76,12 @@ namespace CourseManager.WebUI.Controllers
 
             return Json("BAD");
         }
+
+        [HttpGet]
+        public ActionResult Detail(int id)
+        {
+            CourseDTO model = courseService.Get(id);
+            return View(model);
+        }
     }
 }
