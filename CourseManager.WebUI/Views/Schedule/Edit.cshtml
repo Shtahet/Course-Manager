@@ -1,0 +1,93 @@
+﻿@model CourseManager.WebUI.Models.WebSchedule
+@using CourseManager.BOL.Model;
+@{
+    ViewBag.Title = "Edit";
+    CourseDTO currCourse = (CourseDTO)ViewBag.Course;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>
+            @if (Model.ScheduleID == 0)
+            {
+                @:Создание расписания курса
+}
+            else
+            {
+                @:Редактирование расписания курса
+}
+            - @Html.ActionLink(currCourse.Name, "Detail", new { id = currCourse.CoursID })
+        </h4>
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.ScheduleID)
+        @Html.HiddenFor(model => model.CoursID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DayOfWeek, htmlAttributes: new { @class = "sr-only" })
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">@Html.DisplayNameFor(model => model.DayOfWeek)</div>
+                </div>
+                @Html.DropDownListFor(model => model.DayOfWeek, (SelectList)ViewBag.DayDDL, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "sr-only" })
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">@Html.DisplayNameFor(model => model.StartDate)</div>
+                </div>
+                @Html.DropDownListFor(model => model.StartHour, (IEnumerable<SelectListItem>)ViewBag.HoursSLI, new { @class = "form-control timepart" })
+
+                @Html.DropDownListFor(model => model.StartMinute, (IEnumerable<SelectListItem>)ViewBag.MinutesSLI, new { @class = "form-control timepart" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "sr-only" })
+            <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                    <div class="input-group-text">@Html.DisplayNameFor(model => model.EndDate)</div>
+                </div>
+                @Html.DropDownListFor(model => model.EndHour, (IEnumerable<SelectListItem>)ViewBag.HoursSLI, new { @class = "form-control timepart" })
+
+                @Html.DropDownListFor(model => model.EndMinute, (IEnumerable<SelectListItem>)ViewBag.MinutesSLI, new { @class = "form-control timepart" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="row">
+                <div class="col">
+                    <input type="submit" value="Сохранить" class="btn btn-success" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("К описанию курса", "Detail", new { id = currCourse.CoursID }, new { @class = "btn btn-primary btn-sm" })
+</div>
+
+@section Styles{
+    <style type="text/css">
+        .timepart {
+            max-width: 65px;
+        }
+
+        .input-group-text {
+            min-width: 200px;
+        }
+    </style>
+}
+
+@section Scripts {
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}

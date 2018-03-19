@@ -165,6 +165,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\AutofacConfigModule.cs" />
+    <Compile Include="Models\DayWeek.cs" />
+    <Compile Include="Models\WebSchedule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -187,6 +189,7 @@
     <Content Include="Views\Course\Edit.cshtml" />
     <Content Include="Views\Course\Detail.cshtml" />
     <Content Include="Views\Schedule\ScheduleList.cshtml" />
+    <Content Include="Views\Schedule\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -196,7 +199,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CourseManager.BOL\CourseManager.BOL.csproj">
