@@ -28,11 +28,40 @@
 
     </dl>
 </div>
+<div class="top-buffer" id="schedule">
+    @{ Html.RenderAction("ScheduleList", "Schedule", new { courseID = Model.CoursID }); }
+</div>
 <div class="row">
     <div class="col">
-        @Html.ActionLink("Возврат к списку курсов", "Index", new { area = ""}, new { @class = "btn btn-primary"})
+        @Html.ActionLink("Возврат к списку курсов", "Index", new { area = "" }, new { @class = "btn btn-primary" })
     </div>
 </div>
-<div class="row" id="schedule">
-    Тут будет расписание
-</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.deleteclass').click(function (e) {
+                if (confirm("Вы действительно хотите удалить запись?")) {
+                    var settings = {
+                        url: $(this).data('url'),
+                        type: 'POST',
+                        data: { id: $(this).data('id') },
+                        success: function (result) {
+                            if (result == "OK") {
+                                alert("Запись удалена");
+                                window.location.href = window.location.href;
+                            }
+                            else {
+                                alert("Не удалось удалить запись");
+                            }
+                        },
+                        error: function (result) {
+                            alert("Ошибка запроса: " + result.status + " " + result.statusText + "\n" + result.responseJSON.message);
+                        }
+                    }
+                    $.ajax(settings);
+                }
+            });
+        });
+    </script>
+}
