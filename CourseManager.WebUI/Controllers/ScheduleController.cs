@@ -25,14 +25,29 @@ namespace CourseManager.WebUI.Controllers
 
         public ActionResult ScheduleList(int courseID)
         {
-            IEnumerable<ScheduleDTO> model = scheduleService.FindBy(s => s.CoursID == courseID);
+            IEnumerable<ScheduleDTO> schedules = scheduleService.FindBy(s => s.CoursID == courseID);
+            List<WebSchedule> model = new List<WebSchedule>();
+            foreach(ScheduleDTO schedule in schedules)
+            {
+                model.Add(new WebSchedule()
+                {
+                    CoursID = schedule.CoursID,
+                    ScheduleID = schedule.ScheduleID,
+                    StartDate = schedule.StartDate,
+                    EndDate = schedule.EndDate
+                });
+            }
+
+            //Information about course
+            ViewBag.Course = courseService.Get(courseID);
+
             return PartialView(model);
         }
 
         [HttpGet]
-        public ActionResult Edit(int CourseID, int id = 0)
+        public ActionResult Edit(int courseID, int id = 0)
         {
-            ScheduleDTO schedule = (id == 0) ? new ScheduleDTO() { CoursID = CourseID } : scheduleService.Get(id);
+            ScheduleDTO schedule = (id == 0) ? new ScheduleDTO() { CoursID = courseID } : scheduleService.Get(id);
             WebSchedule model = new WebSchedule()
             {
                 CoursID = schedule.CoursID,
@@ -57,15 +72,47 @@ namespace CourseManager.WebUI.Controllers
             };
 
             //Information about course
-            ViewBag.Course = courseService.Get(CourseID);
+            ViewBag.Course = courseService.Get(courseID);
 
             return View(model);
         }
 
         [HttpPost]
-        public string Edit(WebSchedule schedule)
+        public ActionResult Edit(WebSchedule schedule)
         {
-            return "Model is ready";
+            ScheduleDTO scheduleDTO = new ScheduleDTO()
+            {
+                ScheduleID = schedule.ScheduleID,
+                CoursID = schedule.CoursID,
+                StartDate = schedule.StartDate,
+                EndDate = schedule.EndDate
+            };
+
+            if (ModelState.IsValid)
+            {
+                scheduleService.AddOrUpdate(scheduleDTO);
+                return RedirectToAction("Detail", "Course", new { id = scheduleDTO.CoursID });
+            }
+
+            //Prepare DropDown list for days
+            ViewBag.DayDDL = new SelectList(getWeekDays(), "DayNumber", "DayName", schedule.DayOfWeek);
+
+            //Prepare DropDown list for hours
+            ViewBag.HoursSLI = getHours();
+
+            //Prepare DropDown list for minutes
+            ViewBag.MinutesSLI = new[]
+            {
+                new SelectListItem{Value = "0", Text = "00" },
+                new SelectListItem{Value = "15", Text = "15"},
+                new SelectListItem{Value = "30", Text = "30"},
+                new SelectListItem{Value = "45", Text = "45"}
+            };
+
+            //Information about course
+            ViewBag.Course = courseService.Get(schedule.CoursID);
+
+            return View(schedule);
         }
 
         private List<DayWeek> getWeekDays()
