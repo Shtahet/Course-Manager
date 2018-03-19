@@ -1,45 +1,40 @@
-﻿@model IEnumerable<CourseManager.BOL.Model.ScheduleDTO>
+﻿@model IEnumerable<CourseManager.WebUI.Models.WebSchedule>
+@using CourseManager.BOL.Model
+@using CourseManager.WebUI.Models
+@{
+    CourseDTO course = (CourseDTO)ViewBag.Course;
+    DayWeek itemDay = new DayWeek();
+}
+<div class="row">
+    <div class="col-12">
+        <a class="btn btn-success btn-sm" href="@Url.Action("Edit", new { courseID = course.CoursID})"><span class="glyphicon glyphicon-plus"></span> Добавить расписание</a>
+    </div>
+</div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.ScheduleID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CoursID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.StartDate)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.EndDate)
-        </th>
-        <th></th>
-    </tr>
+<div class="row top-buffer mb-3">
+    <div class="col-2"></div>
+    <div class="col-3"><strong>@Html.DisplayNameFor(model => model.DayOfWeek)</strong></div>
+    <div class="col-2"><strong>@Html.DisplayNameFor(model => model.StartDate)</strong></div>
+    <div class="col-2"><strong>@Html.DisplayNameFor(model => model.EndDate)</strong></div>
+    <div class="col-3"></div>
+</div>
+@foreach (var item in Model)
+{
+    <div class="row mb-1">
+        @{ 
+            itemDay.DayNumber = item.DayOfWeek;
+        }
+        <div class="col-2"></div>
+        <div class="col-3">@itemDay.DayName</div>
+        <div class="col-2">@Html.DisplayFor(modelItem => item.StartHour) : @Html.DisplayFor(modelItem => item.StartMinute)</div>
+        <div class="col-2">@Html.DisplayFor(modelItem => item.EndHour) : @Html.DisplayFor(modelItem => item.EndMinute)</div>
+        <div class="col-3">
+            <div class="btn-group">
+                @Html.ActionLink("Редактировать", "Edit", new { id = item.ScheduleID, courseID = course.CoursID }, new { @class = "btn btn-warning btn-sm" })
+                <a href="javascript:void(0);" class="btn btn-danger btn-sm deleteclass" data-url="@Url.Action("Delete", "Schedule")" data-id="@item.ScheduleID">Удалить</a>
+            </div>
+        </div>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.ScheduleID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CoursID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StartDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.EndDate)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+    </div>
 }
 
-</table>
